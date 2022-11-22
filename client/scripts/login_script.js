@@ -30,54 +30,12 @@ function handleFormSubmit(event) {
 	userInput = prepareDataToSend(userInput);
 
 	if(userInput != false) {
-		let serverUrl = "localhost:8080";
+		let serverUrl = "";
 		sendData(userInput, serverUrl);
 	}
 	else {
 		errorMes.style.color = '#bd1217';
 		errorMes.innerHTML = 'Логин и пароль не могут быть пустыми и не могут содержать пробелы!';
-	}
-}
-
-function stringIsEmpty(str) {
-	if(str === '')
-		return true;
-	return false;
-}
-
-function isSpaceInString(str) {
-	for(let index in str)
-		if(str[index] === " ")
-			return true;
-	return false;
-}
-
-/*
- * If string is empry or contains at least one space - error, return false in calling function
- */
-function prepareDataToSend(obj) {
-	for(let key in obj)
-		if(stringIsEmpty(obj[key]) || isSpaceInString(obj[key]))
-			return false;
-	return obj;
-}
-
-function sendData(data, serverURL) {
-	let json_data = JSON.stringify(data);
-	
-	let xhr = new XMLHttpRequest();
-	
-	xhr.open("POST", serverURL, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-	
-	xhr.send(json_data);
-	if (xhr.status != 200) {
-		// обработать ошибку
-		console.log( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
-		console.log("Хер");
-	} else {
-		// вывести результат
-		console.log( xhr.responseText ); // responseText -- текст ответа.
 	}
 }
 
@@ -90,3 +48,4 @@ const appForm = document.getElementById('login_form');
  * If button is pressed - go to the function handleFormSubmit
  */
 appForm.addEventListener('submit', handleFormSubmit);
+
